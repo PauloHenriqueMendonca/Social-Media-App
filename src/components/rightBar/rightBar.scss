@@ -1,0 +1,103 @@
+@import "../../style.scss";
+
+.rightBar{
+  @include themify($themes) {
+  flex: 3;
+  //to make the left bar stick so it wont move when scroll have to do 3 things
+  //position stricky, see how much you put on the navbar of padding and space, and than use the cal to calculate the height
+  position: sticky;
+  top: 70px;
+  height: calc(100vh - 70px);
+
+  //if you have too many items in your left bar and you need it to scroll you need to 
+  //use the overflow set it to scroll
+  overflow: scroll;
+  background-color: themed("bgSoft");
+  color: themed("textColor");
+  
+  
+  //if you don't want the scroll bar to show just use the webkit
+  &::-webkit-scrollbar{
+    display: none;
+  }
+
+  .container{
+    padding: 20px;
+    .menu{
+      //create a box shadow to create it just go on google and search for create boxshadow
+      -webkit-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.09);
+      -moz-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.09);
+      box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.09);
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: themed("bg");
+
+      span{
+        color: gray;
+      }
+      .user{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 20px 0px;
+        .userInfo{
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          position: relative;
+          img{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+
+          .online{
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: limegreen;
+            //now to make the dot stay inside the picture need to use
+            //position absolute, but for that the parent needs to have position relative
+            position: absolute;
+            top: 0;
+            //and to make it be on the right top corner just give the same size as the picture from the left
+            left: 30px;
+          }
+
+          p{
+            color: themed("textColorSoft");
+          }
+
+          span{
+            font-weight: 500;
+            color: themed("textColor");
+
+          }
+        }
+        .buttons{
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          button{
+            border: none;
+            padding: 5px;
+            color: white;
+            cursor: pointer;
+
+            //to color the buttons instead of using classname we can use the first and last child
+            &:first-child
+            {
+              background-color: rgba(5, 5, 175, 0.781);
+            }
+            &:last-child{
+              background-color: rgba(255, 1, 1, 0.699);
+            }
+          }
+        }
+      }
+  }
+  }
+}
+}

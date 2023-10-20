@@ -1,0 +1,95 @@
+.login{
+  //fill whole page
+  height: 100vh;
+  background-color: #c8f1ff;
+  //align everything to center 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  .container{
+    //divide de container
+    //since we are using display flex to give the left and the right the same size just add flex 1 to each
+    display: flex;
+    //aligns the box in the center with 50% from each side
+    width: 50%;
+    //rounds the borders
+    border-radius: 10px;
+    background-color: white;
+    //min height of the container
+    min-height: 600px;
+    //to show the border radius from the children
+    overflow: hidden;
+
+    .left{
+      flex: 1;
+      //to add an image to the background and center the image
+      //adding the linear gradient adds a color at the top of the image 
+      background: linear-gradient(rgba(87, 141, 240, 0.502),rgba(69, 114, 236, 0.5)), url("https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600") center no-repeat;
+      //so the image can just fit in the space even if the picture is much bigger
+      background-size: cover;
+      padding: 50px;
+      //to break items to diffent lines
+      display: flex;
+      //to make each item be on top of each other
+      flex-direction: column;
+      //space in between the items
+      gap: 30px;
+      color: white;
+
+      h1{
+        font-size: 100px;
+        line-height: 100px;
+      }
+      p{}
+      span{
+        font-size: 14px;
+
+      }
+      button{
+        width: 50%;
+        padding: 10px;
+        border: none;
+        background-color: white;
+        font-weight: bold;
+        color: rgb(19, 19, 133);
+        cursor: pointer;
+      }
+    }
+    
+    .right{
+      flex: 1;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      justify-content: center;
+
+      h1{
+        color: gray;
+      }
+
+      form{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        input{
+          border: none;
+          border-bottom: 1px solid lightgray;
+          padding: 20px 10px;
+        }
+      }
+
+      button{
+        width: 50%;
+        padding: 10px;
+        border: none;
+        background-color: rgba(43, 43, 189, 0.664);
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+}
