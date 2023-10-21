@@ -1,14 +1,12 @@
 import "./home.scss";
+import Stories from "../../components/stories/stories.jsx";
+import Posts from "../../components/posts/posts.jsx";
 
 const Home = () => {
   return (
     <div className="home">
-      <h1>HOME</h1>
-      <h1>HOME</h1>
-      <h1>HOME</h1>
-      
-
-
+      <Stories/>
+      <Posts/>
     </div>
   )
 }

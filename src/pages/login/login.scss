@@ -18,7 +18,7 @@
     border-radius: 10px;
     background-color: white;
     //min height of the container
-    min-height: 600px;
+    max-height: 600px;
     //to show the border radius from the children
     overflow: hidden;
 
@@ -41,6 +41,7 @@
       h1{
         font-size: 100px;
         line-height: 100px;
+        margin: 0px;
       }
       p{}
       span{

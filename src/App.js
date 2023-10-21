@@ -14,9 +14,11 @@ import {
 import "./style.scss";
 import { useContext } from 'react';
 import { DarkModeContext } from './context/darkModeContext.js';
+import { AuthContext } from './context/authContext.js';
+
 
 function App() {
-  const currentUser = true;
+  const {currentUser} = useContext(AuthContext);
 
   const { darkMode } = useContext(DarkModeContext);
   //layout design of how its going to be shown in screen

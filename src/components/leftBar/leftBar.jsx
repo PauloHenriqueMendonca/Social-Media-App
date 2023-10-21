@@ -13,13 +13,22 @@ import Fundraiser from "../../assetImages/fundraiser.png";
 import Tutorial from "../../assetImages/tutorials.jpg";
 import Courses from "../../assetImages/courses.png";
 import User from "../../assetImages/user.png";
+import { AuthContext } from "../../context/authContext";
+import { useContext } from "react";
+
+
 const LeftBar =() => {
+
+  const {currentUser} = useContext(AuthContext);
+
   return(
     <div className="leftBar">
       <div className="container">
         <div className="menu">
           <div className="user">
-            <img src={User} alt="" />
+            <img 
+            src={currentUser.profilePic}
+            alt="" />
             <span>Paulo Pereira</span>
           </div>
           <div className="item">
