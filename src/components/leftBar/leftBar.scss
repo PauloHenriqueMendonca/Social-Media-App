@@ -15,6 +15,10 @@
   background-color: themed("bg");
   color: themed("textColor");
 
+    //using the media query
+    @include mobile{
+      display: none;
+    }
 
   //if you don't want the scroll bar to show just use the webkit
   &::-webkit-scrollbar{

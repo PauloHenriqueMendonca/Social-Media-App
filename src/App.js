@@ -64,7 +64,7 @@ function App() {
         },
         {
           path: "/profile/:id",
-          elemente: <Profile/>
+          element: <Profile/>
         },
       ]
     },

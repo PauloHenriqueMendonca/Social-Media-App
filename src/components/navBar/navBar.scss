@@ -37,6 +37,16 @@ z-index: 999;
       width: 500px;
       background-color: transparent;
       color: themed("textColor");
+
+      //using the media query
+      @include mobile{
+        display: none;
+      }
+
+      @include tablet{
+        width: 200px;
+      }
+    
     }
   }
 }
@@ -45,11 +55,24 @@ z-index: 999;
   display: flex;
   align-items: center;
   gap: 20px;
+
+  //using the media query
+  @include mobile{
+    display: none;
+  }
+
+ 
+
   .user{
     display: flex;
     align-items: center;
     gap: 10px;
     font-weight: 500;
+
+    @include tablet{
+      display: none;
+    }
+
     img{
       width: 30px;
       height: 30px;
