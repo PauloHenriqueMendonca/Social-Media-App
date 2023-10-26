@@ -5,37 +5,44 @@ import Profile from './pages/profile/profile.jsx';
 import NavBar from './components/navBar/navBar.jsx';
 import RightBar from './components/rightBar/rightBar.jsx';
 import LeftBar from './components/leftBar/leftBar.jsx';
-import {
-  createBrowserRouter,
-  Navigate,
-  Outlet,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, Navigate, Outlet, RouterProvider } from "react-router-dom";
 import "./style.scss";
 import { useContext } from 'react';
 import { DarkModeContext } from './context/darkModeContext.js';
 import { AuthContext } from './context/authContext.js';
-
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function App() {
+  
   const {currentUser} = useContext(AuthContext);
-
+  
   const { darkMode } = useContext(DarkModeContext);
   //layout design of how its going to be shown in screen
+  
+  // provide the default query function to your app with defaultOptions
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+    },
+  },
+})
+  
   const Layout = () => {
     return(
-      <div className={`theme-${darkMode ? "dark" : "light"}`}>
-        <NavBar/>
-        <div style={{display: "flex"}}>
-          <LeftBar/>
-          <div style={{flex: 6}}>
-            <Outlet/>
+      <QueryClientProvider client={ queryClient }>
+        <div className={`theme-${darkMode ? "dark" : "light"}`}>
+          <NavBar/>
+          <div style={{display: "flex"}}>
+            <LeftBar/>
+            <div style={{flex: 6}}>
+              <Outlet/>
+            </div>
+            <RightBar/>
           </div>
-          <RightBar/>
         </div>
-      </div>
-    )
-  }
+      </QueryClientProvider>
+    );
+  };
 
   //to verify if you are logged in or not if not logged in send to log in page else continue
   const ProtectedRoute = ({children}) => {

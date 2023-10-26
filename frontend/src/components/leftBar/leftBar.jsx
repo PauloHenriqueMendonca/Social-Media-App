@@ -12,7 +12,6 @@ import Messages from "../../assetImages/messages.png";
 import Fundraiser from "../../assetImages/fundraiser.png";
 import Tutorial from "../../assetImages/tutorials.jpg";
 import Courses from "../../assetImages/courses.png";
-import User from "../../assetImages/user.png";
 import { AuthContext } from "../../context/authContext";
 import { useContext } from "react";
 
@@ -28,8 +27,8 @@ const LeftBar =() => {
           <div className="user">
             <img 
             src={currentUser.profilePic}
-            alt="" />
-            <span>Paulo Pereira</span>
+            alt={currentUser.name} />
+            <span>{currentUser.name}</span>
           </div>
           <div className="item">
             <img src={Friends} alt="" />

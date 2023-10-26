@@ -1,0 +1,33 @@
+# POST http://localhost:8800/api/auth/register
+#   Content-Type: application/json
+
+#   {
+#     "username": "test2",
+#     "email": "test2@gmail.com",
+#     "password": "12345",
+#     "name": "PH"
+#   }
+
+# POST http://localhost:8800/api/auth/login
+#   Content-Type: application/json
+  
+#   {
+#     "username": "test3",
+#     "password": "test3"
+#   }
+
+# POST http://localhost:8800/api/auth/logout
+#   Content-Type: application/json
+  
+#   {
+#     "username": "test2",
+#     "password": "12345"
+#   }
+
+# GET http://localhost:8800/api/posts
+
+POST http://localhost:8800/api/posts
+
+{
+  "desc": "from api.rest in VS Code",
+}
