@@ -7,7 +7,7 @@ export const getComments = (req,res) => {
 
   const q = `SELECT c.*, u.id AS userId, name, profilePic FROM comments AS c 
   JOIN users AS u ON (u.id = c.userId) 
-  WHERE c.postId = ? ORDER BY c.createdAt DESC`;
+  WHERE c.postId = ? ORDER BY c.createAt DESC`;
 
   db.query(q, [req.query.postId], (err, data) => {
     if(err)
@@ -19,15 +19,14 @@ export const getComments = (req,res) => {
 
 export const addComment = (req, res) => {
   const token = req.cookies.accessToken;
-  
   if(!token)
     return res.status(401).json("");
 
-    jwt.verify(token, "secrekey", (err, userInfo) => {
+    jwt.verify(token, "secretkey", (err, userInfo) => {
       if(err)
-        return res.status(403).json("Token is not valid!");
+        return res.status(403).json("Unable to send comment!");
 
-      const q = "INSERT INTO comments(`desc`, `createdAt`, `userId`, `postId`) VALUES (?) ";
+      const q = "INSERT INTO comments(`desc`, `createAt`, `userId`, `postId`) VALUES (?) ";
 
       const values = [
         req.body.desc,
@@ -44,6 +43,4 @@ export const addComment = (req, res) => {
       });
 
     });
-  
-
 }

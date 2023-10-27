@@ -12,11 +12,11 @@ const Comments = ({postId}) => {
 
   const {currentUser} = useContext(AuthContext);
 
- const {isLoading, error, data } = useQuery(["comments"], () => {
+ const {isLoading, error, data } = useQuery(["comments"], () => 
     makeRequest.get("/comments?postId=" + postId).then((res) => {
-      return res.data;
-    });
- });
+    return res.data;
+    })
+ );
 
  const queryClient = useQueryClient();
 
@@ -26,6 +26,7 @@ const Comments = ({postId}) => {
   },
   {
     onSuccess: () => {
+      // Invalidate and refetch
       queryClient.invalidateQueries(["comments"]);
     },
   }
@@ -33,7 +34,7 @@ const Comments = ({postId}) => {
 
  const handleClick = async (e) => {
   e.preventDefault();
-  mutation.mutate({desc, postId});
+  mutation.mutate({ desc, postId });
   setDesc("");
  };
 
@@ -41,10 +42,11 @@ const Comments = ({postId}) => {
   return(
     <div className="comments">
       <div className="write">
-        <img src={"/upload/" + currentUser.profilePic} alt={currentUser.name} />
+        <img src={currentUser.profilePic} alt={currentUser.name} />
         <input type="text" placeholder="write a comment" 
-        value={desc}
-        onChange={(e) => setDesc(e.target.value)}/>
+        onChange={e=> setDesc(e.target.value)} 
+        value = {desc}
+        />
         <button onClick={handleClick}>Send</button>
       </div>
       {error 
@@ -53,7 +55,7 @@ const Comments = ({postId}) => {
       ? "Loading" 
       : data.map((comment) => (
         <div className="comment">
-          <img src={"/upload/" + comment.profilePic} alt="" />
+          <img src={comment.profilePic} alt="" />
           <div className="info">
             <span>{comment.name}</span>
             <p>{comment.desc}</p>
@@ -63,7 +65,7 @@ const Comments = ({postId}) => {
           </span>
         </div>
       ))}
-    </div>
+    </div>  
   );
 };
 
