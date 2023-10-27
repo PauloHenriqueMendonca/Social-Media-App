@@ -1,46 +1,70 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import "./comments.scss";
 import{AuthContext} from "../../context/authContext.js";
-const Comments = () => {
+import moment from "moment";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { makeRequest } from "../../axios.js";
+
+
+const Comments = ({postId}) => {
+
+  const [desc, setDesc] = useState("");
 
   const {currentUser} = useContext(AuthContext);
 
-  const comments = [
-    {
-      id: 1,
-      name: "Paulo Pereira",
-      userId: 1,
-      profilePic: "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi eligendi quas explicabo repudianda",
-      img: "https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600",
+ const {isLoading, error, data } = useQuery(["comments"], () => {
+    makeRequest.get("/comments?postId=" + postId).then((res) => {
+      return res.data;
+    });
+ });
+
+ const queryClient = useQueryClient();
+
+ const mutation = useMutation(
+  (newComment) => {
+    return makeRequest.post("/comments", newComment);
+  },
+  {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["comments"]);
     },
-    {
-      id: 2,
-      name: "Paulo Pereira",
-      userId: 2,
-      profilePic: "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi eligendi quas explicabo repudianda",
-    },
-  ]
+  }
+ );
+
+ const handleClick = async (e) => {
+  e.preventDefault();
+  mutation.mutate({desc, postId});
+  setDesc("");
+ };
+
+
   return(
     <div className="comments">
       <div className="write">
-        <img src={currentUser.profilePic} alt={currentUser.name} />
-        <input type="text" placeholder="write a comment"/>
-        <button>Send</button>
+        <img src={"/upload/" + currentUser.profilePic} alt={currentUser.name} />
+        <input type="text" placeholder="write a comment" 
+        value={desc}
+        onChange={(e) => setDesc(e.target.value)}/>
+        <button onClick={handleClick}>Send</button>
       </div>
-      {comments.map(comment => (
+      {error 
+      ? "Something Went Wrong!" 
+      :isLoading 
+      ? "Loading" 
+      : data.map((comment) => (
         <div className="comment">
-          <img src={comment.profilePic} alt="" />
+          <img src={"/upload/" + comment.profilePic} alt="" />
           <div className="info">
             <span>{comment.name}</span>
             <p>{comment.desc}</p>
           </div>
-          <span className="date">1 hour ago</span>
+          <span className="date">
+            {moment(comment.createAt).fromNow()}
+          </span>
         </div>
-      ))
-      }</div>
-  )
-}
+      ))}
+    </div>
+  );
+};
 
 export default Comments
