@@ -20,12 +20,7 @@ function App() {
   //layout design of how its going to be shown in screen
   
   // provide the default query function to your app with defaultOptions
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-    },
-  },
-})
+const queryClient = new QueryClient();  
   
   const Layout = () => {
     return(

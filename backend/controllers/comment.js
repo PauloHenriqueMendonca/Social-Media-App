@@ -41,6 +41,5 @@ export const addComment = (req, res) => {
 
         return res.status(200).json("Comment created!");
       });
-
     });
 }

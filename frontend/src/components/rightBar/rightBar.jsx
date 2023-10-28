@@ -1,5 +1,8 @@
 import "./rightBar.scss";
 import User from "../../assetImages/user.png";
+import moment from "moment";
+
+
 const RightBar = () => {
   return(
     <div className="rightBar">
@@ -37,7 +40,7 @@ const RightBar = () => {
               </p>
             </div>
             <div>
-              <span> 1 min ago</span>    
+              <span> {moment(User.createAt).fromNow()} </span>    
             </div>
           </div>
           <div className="user">

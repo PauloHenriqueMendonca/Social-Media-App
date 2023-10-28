@@ -38,7 +38,6 @@ const Comments = ({postId}) => {
   setDesc("");
  };
 
-
   return(
     <div className="comments">
       <div className="write">
